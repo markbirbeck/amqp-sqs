@@ -1,0 +1,30 @@
+{
+  "node": true
+, "devel": true
+
+, "immed": true
+, "laxcomma": true
+, "newcap": true
+, "unused": true
+
+  /**
+   * From http://seravo.fi/2013/javascript-the-winning-style
+   */
+
+, "camelcase" : true
+, "curly": true
+, "indent": 2
+, "maxlen": 80
+, "quotmark": "single"
+, "trailing": true
+, "undef": true
+
+, "globals": {
+    "after": true
+  , "afterEach": true
+  , "before": true
+  , "beforeEach": true
+  , "describe": true
+  , "it": true
+  }
+}
