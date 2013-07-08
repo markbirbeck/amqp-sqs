@@ -1,0 +1,17 @@
+amqp:
+  subscribe:
+
+    # How often (in minutes) to check for messages in subscribe():
+    #
+    pollInterval: 5
+
+aws:
+
+  # Region, which must be one of:
+  #
+  #  us-east-1, us-west-1, us-west-2, eu-west-1, ap-southeast-1, ap-northeast-1
+  #
+  region: eu-west-1
+
+  sqs:
+    visibilityTimeout: 120
