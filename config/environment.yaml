@@ -1,5 +1,12 @@
 # Copy this file for your setup:
 #
+amqp:
+  subscribe:
+
+    # How often (in minutes) to check for messages in subscribe():
+    #
+    #pollInterval: 5
+
 aws:
 
   # Credentials:
