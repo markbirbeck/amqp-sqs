@@ -1,0 +1,23 @@
+{
+  "name": "amqp-sqs",
+  "description": "AMQP facade for SQS",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+      "aws-sqs": "~0.0.6"
+    , "config": "~0.4.27"
+    , "underscore": "~1.5.1"
+    , "yaml": "~0.2.3"
+  },
+  "engines": {
+      "node": "0.8.x"
+    , "npm": "1.2.x"
+  },
+  "devDependencies": {
+      "mocha": "~1.12.0"
+    , "should": "~1.2.2"
+  },
+  "scripts": {
+    "test": "mocha"
+  }
+}
