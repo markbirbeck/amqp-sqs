@@ -18,6 +18,6 @@
     , "should": "~1.2.2"
   },
   "scripts": {
-    "test": "mocha"
+    "test": "export NODE_ENV=_default; mocha"
   }
 }
