@@ -61,5 +61,99 @@ describe('queue:', function (){
         });
       });
     });
+
+    describe('with rate limit', function (){
+      it('use defaults from default.yaml of 10 messages per second',
+          function (done){
+        connection.on('ready', function (err){
+          should.not.exist(err);
+
+          var queueName = 'test-amqp-queue-2'
+            , numMessages = 100
+            , count = numMessages
+            , rate = 10;
+
+          connection.queue(queueName, function(err, q){
+            should.not.exist(err);
+            should.exist(q);
+            var start = new Date();
+
+            q.subscribe(function L(message, whenDone){
+              should.exist(message);
+              should.exist(whenDone);
+
+              --count;
+
+              whenDone(function (err, remainingMessages){
+                should.not.exist(err);
+                remainingMessages.should.equal(count);
+
+                /**
+                 * If we're finished then trigger the callback:
+                 */
+
+                if (!remainingMessages){
+                  var elapsed = (new Date() - start) / 1000
+                    , actualRate = numMessages / elapsed;
+
+                  /**
+                   * Allow a 10% deviation from the desired rate:
+                   */
+
+                  actualRate.should.be.within(rate * 0.85, rate * 1.15);
+                  done();
+                }
+              });
+            });
+          });
+        });
+      });
+
+      it('use override values of 20 messages per second', function (done){
+        connection.on('ready', function (err){
+          should.not.exist(err);
+
+          var queueName = 'test-amqp-queue-2'
+            , numMessages = 100
+            , count = numMessages
+            , rate = 20;
+
+          connection.queue(queueName, function(err, q){
+            should.not.exist(err);
+            should.exist(q);
+            var start = new Date();
+
+            q.subscribe({tokensPerInterval: rate, interval: 'second'},
+                function L(message, whenDone){
+              should.exist(message);
+              should.exist(whenDone);
+
+              --count;
+
+              whenDone(function (err, remainingMessages){
+                should.not.exist(err);
+                remainingMessages.should.equal(count);
+
+                /**
+                 * If we're finished then trigger the callback:
+                 */
+
+                if (!remainingMessages){
+                  var elapsed = (new Date() - start) / 1000
+                    , actualRate = numMessages / elapsed;
+
+                  /**
+                   * Allow a 10% deviation from the desired rate:
+                   */
+
+                  actualRate.should.be.within(rate * 0.85, rate * 1.15);
+                  done();
+                }
+              });
+            });
+          });
+        });
+      });
+    });
   });
 });
