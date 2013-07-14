@@ -7,6 +7,21 @@ amqp:
     #
     #pollInterval: 5
 
+    rateLimit:
+      # When true, don't rate limit but send messages immediately:
+      #
+      #fireImmediately: false
+
+      # When rate limiting, the number of items per unit of time that should
+      # be passed through:
+      #
+      #tokensPerInterval: 10
+
+      # When rate limiting, the unit of time that the tokensPerInterval value
+      # will operate over:
+      #
+      #interval: seconds
+
 aws:
 
   # Credentials:

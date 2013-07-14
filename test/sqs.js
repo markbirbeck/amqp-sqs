@@ -78,7 +78,7 @@ describe('message: ', function (){
         res.should.eql({ 'count': 0, 'in_progress': 1 });
         done();
       });
-    }, 1000);
+    }, 10000);
   });
 
   it('should be deleted', function (done){
@@ -98,6 +98,6 @@ describe('message: ', function (){
         res.should.eql({ 'count': 0, 'in_progress': 0 });
         done();
       });
-    }, 2000);
+    }, 10000);
   });
 });
