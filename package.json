@@ -1,7 +1,7 @@
 {
   "name": "amqp-sqs",
   "description": "AMQP facade for SQS",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "private": true,
   "dependencies": {
       "aws-sqs": "~0.0.6"
