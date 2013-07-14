@@ -8,6 +8,7 @@
     , "config": "~0.4.27"
     , "underscore": "~1.5.1"
     , "yaml": "~0.2.3"
+    , "limiter": "~1.0.3"
   },
   "engines": {
       "node": "0.8.x"
