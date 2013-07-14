@@ -28,33 +28,35 @@ describe('queue:', function (){
     });
   });
 
-  it('should subscribe', function (done){
-    connection.on('ready', function (err){
-      should.not.exist(err);
-
-      var queueName = 'test-amqp-queue-2'
-        , count = 2;
-
-      connection.queue(queueName, function(err, q){
+  describe('subscribe:', function (){
+    it('with fireImmediately', function (done){
+      connection.on('ready', function (err){
         should.not.exist(err);
-        should.exist(q);
-        q.subscribe(function L(message, whenDone){
-          should.exist(message);
-          should.exist(whenDone);
 
-          --count;
+        var queueName = 'test-amqp-queue-2'
+          , count = 100;
 
-          whenDone(function (err, remainingMessages){
-            should.not.exist(err);
-            remainingMessages.should.equal(count);
+        connection.queue(queueName, function(err, q){
+          should.not.exist(err);
+          should.exist(q);
+          q.subscribe({fireImmediately: true}, function L(message, whenDone){
+            should.exist(message);
+            should.exist(whenDone);
 
-            /**
-             * If we're finished then trigger the callback:
-             */
+            --count;
 
-            if (!remainingMessages){
-              done();
-            }
+            whenDone(function (err, remainingMessages){
+              should.not.exist(err);
+              remainingMessages.should.equal(count);
+
+              /**
+               * If we're finished then trigger the callback:
+               */
+
+              if (!remainingMessages){
+                done();
+              }
+            });
           });
         });
       });
