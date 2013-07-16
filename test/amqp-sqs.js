@@ -11,6 +11,55 @@ describe('amqp:', function (){
         done();
       });
     });
+
+    it('should publish', function (done){
+      connection.on('ready', function (err){
+        should.not.exist(err);
+
+        var queueName = 'test-amqp-send-queue-1'
+          , testMessage = {hello: 'world!'};
+
+        connection.publish(
+          queueName
+        , JSON.stringify(testMessage)
+        , function (){
+          connection.queue(queueName, function(err, q){
+            q.subscribe({fireImmediately: true}, function L(message, whenDone){
+              testMessage.should.eql(message);
+              whenDone(done);
+            });
+          });
+        });
+      });
+    });
+  });
+
+  describe('exchange:', function (){
+    it('should publish', function (done){
+      connection.on('ready', function (err){
+        should.not.exist(err);
+
+        var queueName = 'test-amqp-send-queue-2'
+          , testMessage = {hello: 'world!'};
+
+        connection.exchange(queueName, function(err, exchange){
+          should.not.exist(err);
+          should.exist(exchange);
+
+          exchange.publish(
+            ''
+          , JSON.stringify(testMessage)
+          , function (){
+            connection.queue(queueName, function(err, q){
+              q.subscribe({fireImmediately: true}, function L(message, whenDone){
+                testMessage.should.eql(message);
+                whenDone(done);
+              });
+            });
+          });
+        });
+      });
+    });
   });
 
   describe('queue:', function (){
