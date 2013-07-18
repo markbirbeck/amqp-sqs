@@ -7,6 +7,7 @@
       "aws-sqs": "~0.0.6"
     , "config": "~0.4.27"
     , "underscore": "~1.5.1"
+    , "winston": "~0.7.2"
     , "yaml": "~0.2.3"
     , "limiter": "~1.0.3"
   },
