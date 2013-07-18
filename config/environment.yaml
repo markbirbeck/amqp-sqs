@@ -1,6 +1,10 @@
 # Copy this file for your setup:
 #
 amqp:
+  publish:
+
+    #batchSize: 500
+
   subscribe:
 
     # How often (in minutes) to check for messages in subscribe():
