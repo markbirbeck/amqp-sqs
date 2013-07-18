@@ -21,7 +21,8 @@ describe('amqp:', function (){
 
         connection.publish(
           queueName
-        , JSON.stringify(testMessage)
+        , testMessage
+        , { batchSize: 1 }
         , function (){
           connection.queue(queueName, function(err, q){
             q.subscribe({fireImmediately: true}, function L(message, whenDone){
@@ -42,13 +43,13 @@ describe('amqp:', function (){
         var queueName = 'test-amqp-send-queue-2'
           , testMessage = {hello: 'world!'};
 
-        connection.exchange(queueName, function(err, exchange){
+        connection.exchange(queueName, { batchSize: 1 }, function(err, exchange){
           should.not.exist(err);
           should.exist(exchange);
 
           exchange.publish(
             ''
-          , JSON.stringify(testMessage)
+          , testMessage
           , function (){
             connection.queue(queueName, function(err, q){
               q.subscribe({fireImmediately: true}, function L(message, whenDone){
