@@ -13,6 +13,13 @@ CONFIG.setModuleDefaults('amqp', {
    */
 
     batchSize: 500
+
+  /**
+   * How long (in milliseconds) to wait before flushing messages, even
+   * if batchSize hasn't been reached:
+   */
+
+  , flushTimeout: 500
   }
 , subscribe: {
 
