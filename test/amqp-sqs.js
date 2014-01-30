@@ -79,7 +79,7 @@ describe('amqp:', function (){
       });
     });
 
-    describe('subscribe:', function (){
+    describe.skip('subscribe:', function (){
       it('with fireImmediately', function (done){
         connection.on('ready', function (err){
           should.not.exist(err);
