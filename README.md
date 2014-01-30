@@ -79,7 +79,7 @@ Setting `fireImmediately` to `true` means that we want to pull messages off the 
 
 #### Rate Limiting
 
-When subscribing to a queue it's possible to get the messages to arrive at specific rate. This is useful if the processing that should be done with each message doesn't take place as quickly as the messages arrive. For example, if the data received in a message should be inserted into a datastore that is also serving queries then it may be desirable to limit inserts to no more than 20 a second. By specifying that in the subscription step we save the need to create any local buffers, and can instead leave the messages within SQS until they are needed:
+When subscribing to a queue it's possible to get the messages to arrive at a specific rate. This is useful if the processing that should be done with each message doesn't take place as quickly as the messages arrive. For example, if the data received in a message should be inserted into a datastore that is also serving queries then it may be desirable to limit inserts to no more than 20 a second. By specifying that in the subscription step we save the need to create any local buffers, and can instead leave the messages within SQS until they are needed:
 
 ```javascript
 connection.queue(queueName, function(err, q){
