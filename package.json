@@ -2,7 +2,7 @@
   "name": "amqp-sqs",
   "description": "AMQP facade for SQS",
   "version": "0.6.0",
-  "private": true,
+  "main": "index.js",
   "dependencies": {
       "aws-sqs": "~0.0.6"
     , "config": "~0.4.35"
@@ -11,6 +11,7 @@
     , "yaml": "~0.2.3"
     , "limiter": "~1.0.5"
   },
+  "license": "MIT",
   "engines": {
       "node": "0.8.x"
     , "npm": "1.2.x"
@@ -21,5 +22,18 @@
   },
   "scripts": {
     "test": "export NODE_ENV=_default; mocha"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/markbirbeck/amqp-sqs"
+  },
+  "keywords": [
+    "amqp",
+    "aws",
+    "sqs"
+  ],
+  "bugs": {
+    "url": "https://github.com/markbirbeck/amqp-sqs/issues"
+  },
+  "homepage": "https://github.com/markbirbeck/amqp-sqs"
 }
