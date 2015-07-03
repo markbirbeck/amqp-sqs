@@ -4,7 +4,7 @@
 
 var CONFIG = require('config');
 
-CONFIG.setModuleDefaults('amqp', {
+CONFIG.util.setModuleDefaults('amqp', {
   publish: {
 
     /**
@@ -53,7 +53,7 @@ CONFIG.setModuleDefaults('amqp', {
   }
 });
 
-CONFIG.setModuleDefaults('aws', {
+CONFIG.util.setModuleDefaults('aws', {
 
   /**
    * Region, which must be one of:
