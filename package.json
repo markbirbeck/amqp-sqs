@@ -21,7 +21,7 @@
     "should": "^7.0.1"
   },
   "scripts": {
-    "test": "export NODE_ENV=_default; mocha"
+    "test": "mocha"
   },
   "repository": {
     "type": "git",
