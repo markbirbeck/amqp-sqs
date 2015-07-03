@@ -4,7 +4,7 @@
   "version": "0.7.0",
   "main": "index.js",
   "dependencies": {
-    "aws-sqs": "0.0.6",
+    "aws-sdk": "^2.1.36",
     "config": "^1.14.0",
     "limiter": "~1.0.5",
     "lodash": "^3.10.0",
