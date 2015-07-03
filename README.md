@@ -3,6 +3,8 @@ amqp-sqs
 
 A very light wrapper around Amazon's SQS which looks like AMQP.
 
+[![wercker status](https://app.wercker.com/status/84d8fa255b376416e9eac46fd2e6c025/m/master "wercker status")](https://app.wercker.com/project/bykey/84d8fa255b376416e9eac46fd2e6c025)
+
 The idea is not to fully implement AMQP, but rather to allow SQS to be used in a project to get it going quickly, whilst retaining the ability to be able to switch out for something like RabbitMQ later, if necessary.
 
 Since SQS can handle quite large payloads it's often cheaper to batch up a number of application messages into a single SQS message. When subscribing to the messages the library will split apart the messages and make them appear as if they are separate.
