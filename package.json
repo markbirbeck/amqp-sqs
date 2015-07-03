@@ -4,12 +4,12 @@
   "version": "0.7.0",
   "main": "index.js",
   "dependencies": {
-      "aws-sqs": "~0.0.6"
-    , "config": "~0.4.35"
-    , "lodash": "~2.4.1"
-    , "winston": "~0.7.2"
-    , "yaml": "~0.2.3"
-    , "limiter": "~1.0.5"
+    "aws-sqs": "0.0.6",
+    "config": "^1.14.0",
+    "limiter": "~1.0.5",
+    "lodash": "^3.10.0",
+    "winston": "^1.0.1",
+    "yaml": "^0.2.3"
   },
   "license": "MIT",
   "engines": {
@@ -17,8 +17,8 @@
     , "npm": "1.2.x"
   },
   "devDependencies": {
-      "mocha": "~1.17.0"
-    , "should": "~3.1.2"
+    "mocha": "^2.2.5",
+    "should": "^7.0.1"
   },
   "scripts": {
     "test": "export NODE_ENV=_default; mocha"
