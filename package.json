@@ -13,8 +13,8 @@
   },
   "license": "MIT",
   "engines": {
-      "node": "0.8.x"
-    , "npm": "1.2.x"
+    "node": "0.8.x",
+    "npm": "1.2.x"
   },
   "devDependencies": {
     "mocha": "^2.2.5",
