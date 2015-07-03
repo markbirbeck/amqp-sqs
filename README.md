@@ -7,7 +7,15 @@ The idea is not to fully implement AMQP, but rather to allow SQS to be used in a
 
 Since SQS can handle quite large payloads it's often cheaper to batch up a number of application messages into a single SQS message. When subscribing to the messages the library will split apart the messages and make them appear as if they are separate.
 
-To run the tests, copy the `config/environment.yaml` file to something suitable, and then set your AWS keys. The name of the file you use should be set in the `NODE_ENV` environment variable. For example, if you create a file `config/test.yaml` to hold your keys then you can test as follows:
+To run the tests ensure that your AWS keys are available. This is usually done through the [environment variables set for the AWS CLI tools](http://docs.aws.amazon.com/cli/latest/userguide/cli-chap-getting-started.html#cli-environment), so if the following environment variables are set then there is nothing else needed:
+
+```
+AWS_ACCESS_KEY_ID
+AWS_SECRET_ACCESS_KEY
+AWS_DEFAULT_REGION
+```
+
+Alternatively, the values can be provided via a config file. A template is provided at `config/environment.yaml` which can be copied and then filled in with your AWS keys. The name of the file you use should be set in the `NODE_ENV` environment variable. For example, if you create a file `config/test.yaml` to hold your keys then you can test as follows:
 
 ```shell
 export NODE_ENV=test
@@ -15,14 +23,6 @@ mocha
 ```
 
 For more information on why that works, see the magical [config module](https://npmjs.org/package/config).
-
-Alternatively, if using `npm test`, then create a `config/_default.yaml` file, which looks something like this:
-
-```yaml
-aws:
-  accessKeyId: '12345678blah'
-  secretAccessKey: xyzblah
-```
 
 NOTE: The `queue.subscribe` tests are being skipped since they require lots of messages to be already present in the SQS queue. Rather than providing the messages manually, the tests should be updated to provide the necessary messages.
 
@@ -79,7 +79,7 @@ Setting `fireImmediately` to `true` means that we want to pull messages off the 
 
 #### Rate Limiting
 
-When subscribing to a queue it's possible to get the messages to arrive at specific rate. This is useful if the processing that should be done with each message doesn't take place as quickly as the messages arrive. For example, if the data received in a message should be inserted into a datastore that is also serving queries then it may be desirable to limit inserts to no more than 20 a second. By specifying that in the subscription step we save the need to create any local buffers, and can instead leave the messages within SQS until they are needed:
+When subscribing to a queue it's possible to get the messages to arrive at a specific rate. This is useful if the processing that should be done with each message doesn't take place as quickly as the messages arrive. For example, if the data received in a message should be inserted into a datastore that is also serving queries then it may be desirable to limit inserts to no more than 20 a second. By specifying that in the subscription step we save the need to create any local buffers, and can instead leave the messages within SQS until they are needed:
 
 ```javascript
 connection.queue(queueName, function(err, q){

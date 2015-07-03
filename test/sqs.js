@@ -1,62 +1,61 @@
-describe('sqs:', function (){
-  var should = require('should')
-    , sqs = require('../lib/sqs');
+describe('sqs:', function() {
+  var should = require('should');
+  var sqs = require('../lib/sqs');
 
-  describe('queue:', function (){
+  describe('queue:', function() {
     var queue = 'test-queue-1';
 
-    it('should be created', function (done){
-      sqs.createQueue(queue, function (err){
+    it('should be created', function(done) {
+      sqs.createQueue(queue, function(err) {
         should.not.exist(err);
         done();
       });
     });
 
-    it('should be deleted', function (done){
-      sqs.deleteQueue(queue, function (err){
+    it('should be deleted', function(done) {
+      sqs.deleteQueue(queue, function(err) {
         should.not.exist(err);
         done();
       });
     });
   });
 
+  describe('message: ', function() {
+    var queue = 'test-queue-2';
+    var testMessage = 'Some data to send...enchanté.';
+    var message;
 
-  describe('message: ', function (){
-    var queue = 'test-queue-2'
-      , testMessage = 'Some data to send...enchanté.'
-      , message;
-
-    before(function(done){
-      sqs.createQueue(queue, function (err){
+    before(function(done) {
+      sqs.createQueue(queue, function(err) {
         should.not.exist(err);
         done();
       });
     });
 
-    after(function(done){
-      sqs.deleteQueue(queue, function (err){
+    after(function(done) {
+      sqs.deleteQueue(queue, function(err) {
         should.not.exist(err);
         done();
       });
     });
 
-    it('should be sent', function (done){
-      sqs.sendMessage(queue, testMessage, function (err){
+    it('should be sent', function(done) {
+      sqs.sendMessage(queue, testMessage, function(err) {
         should.not.exist(err);
         done();
       });
     });
 
-    it('should be in queue', function (done){
-      sqs.countMessages(queue, function (err, res){
+    it('should be in queue', function(done) {
+      sqs.countMessages(queue, function(err, res) {
         should.not.exist(err);
-        res.should.eql({ 'count': 1, 'in_progress': 0 });
+        res.should.eql({'count': 1, 'in_progress': 0});
         done();
       });
     });
 
-    it('should be received', function (done){
-      sqs.receiveMessage(queue, function (err, res){
+    it('should be received', function(done) {
+      sqs.receiveMessage(queue, function(err, res) {
         should.not.exist(err);
         res.should.have.length(1);
 
@@ -67,36 +66,36 @@ describe('sqs:', function (){
       });
     });
 
-    it('should be in progress', function (done){
+    it('should be in progress', function(done) {
 
       /**
        * Add a short delay to allow AWS to sort itself out:
        */
 
-      setTimeout(function (){
-        sqs.countMessages(queue, function (err, res){
+      setTimeout(function() {
+        sqs.countMessages(queue, function(err, res) {
           should.not.exist(err);
-          res.should.eql({ 'count': 0, 'in_progress': 1 });
+          res.should.eql({'count': 0, 'in_progress': 1});
           done();
         });
       }, 10000);
     });
 
-    it('should be deleted', function (done){
+    it('should be deleted', function(done) {
       should.exist(message);
       message.should.have.property('ReceiptHandle');
 
-      sqs.deleteMessage(queue, message.ReceiptHandle, function (err){
+      sqs.deleteMessage(queue, message.ReceiptHandle, function(err) {
         should.not.exist(err);
         done();
       });
     });
 
-    it('should be removed from queue', function (done){
-      setTimeout(function (){
-        sqs.countMessages(queue, function (err, res){
+    it('should be removed from queue', function(done) {
+      setTimeout(function() {
+        sqs.countMessages(queue, function(err, res) {
           should.not.exist(err);
-          res.should.eql({ 'count': 0, 'in_progress': 0 });
+          res.should.eql({'count': 0, 'in_progress': 0});
           done();
         });
       }, 10000);
