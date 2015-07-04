@@ -17,11 +17,14 @@ AWS_SECRET_ACCESS_KEY
 AWS_DEFAULT_REGION
 ```
 
-Alternatively, the values can be provided via a config file. A template is provided at `config/environment.yaml` which can be copied and then filled in with your AWS keys. The name of the file you use should be set in the `NODE_ENV` environment variable. For example, if you create a file `config/test.yaml` to hold your keys then you can test as follows:
+Alternatively, the values can be provided via config files. This can be with a `.env` file that will set environment variables, as well as with a structured config file.
+
+If using a config file then a template is provided at `config/environment.yaml` which can be copied and then filled in with your AWS keys, and the name of the file you use will need to be set in the `NODE_ENV` environment variable.
+
+For example, if you create a file `config/test.yaml` to hold your keys and other configuration information then you can test as follows:
 
 ```shell
-export NODE_ENV=test
-mocha
+NODE_ENV=test npm test
 ```
 
 For more information on why that works, see the magical [config module](https://npmjs.org/package/config).
