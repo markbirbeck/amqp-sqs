@@ -1,3 +1,5 @@
+require('dotenv').load();
+
 describe('sqs:', function() {
   var should = require('should');
   var sqs = require('../lib/sqs');

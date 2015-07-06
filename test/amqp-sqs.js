@@ -1,3 +1,5 @@
+require('dotenv').load();
+
 describe('amqp:', function() {
   var amqp = require('../lib/amqp-sqs');
   var connection = amqp.createConnection({});
