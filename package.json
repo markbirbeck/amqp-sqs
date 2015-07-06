@@ -1,7 +1,7 @@
 {
   "name": "amqp-sqs",
   "description": "AMQP facade for SQS",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "main": "index.js",
   "dependencies": {
     "aws-sdk": "^2.1.36",
