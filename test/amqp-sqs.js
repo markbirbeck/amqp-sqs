@@ -76,6 +76,36 @@ describe('amqp:', function() {
       });
     });
 
+    it('#getMessageCount()', function(done) {
+      connection.on('ready', function(err) {
+        should.not.exist(err);
+
+        var queueName = 'test-amqp-send-queue-2';
+        var testMessage = {hello: 'world!'};
+
+        connection.exchange(queueName, {batchSize: 1}, function(err, exchange) {
+          should.not.exist(err);
+          should.exist(exchange);
+
+          exchange.publish(
+            '' , testMessage , function() {
+            connection.queue(queueName, function(err, q) {
+              q.getMessageCount(function(err, count) {
+                should.not.exist(err);
+
+                count.should.equal(1);
+                q.subscribe({fireImmediately: true},
+                    function L(message, whenDone) {
+                  testMessage.should.eql(message);
+                  whenDone(done);
+                });
+              });
+            });
+          });
+        });
+      });
+    });
+
     describe.skip('subscribe:', function() {
       it('with fireImmediately', function(done) {
         connection.on('ready', function(err) {
